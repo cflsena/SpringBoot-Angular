@@ -1,4 +1,4 @@
-package com.example.deve.backend.api.utils;
+package com.example.dev.backend.api.utils;
 
 import java.util.List;
 

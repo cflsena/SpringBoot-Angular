@@ -1,4 +1,4 @@
-package com.example.deve.backend.api.entity;
+package com.example.dev.backend.api.entity;
 
 import java.io.Serializable;
 

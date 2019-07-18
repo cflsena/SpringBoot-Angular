@@ -1,4 +1,4 @@
-package com.example.deve.backend.api.constraint;
+package com.example.dev.backend.api.constraint;
 
 public final class ApiMappingContraint {
 

@@ -1,4 +1,4 @@
-package com.example.deve.backend.api;
+package com.example.dev.backend.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
