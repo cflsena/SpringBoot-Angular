@@ -1,10 +1,8 @@
 package com.example.dev.backend.api.service;
 
-import java.util.List;
-
 import com.example.dev.backend.api.entity.CategoryEntity;
+import com.example.dev.backend.api.service.commons.interfaces.GenericService;
 
-public interface CategoryService {
+public interface CategoryService extends GenericService<CategoryEntity, Long> {
 
-	List<CategoryEntity> findAll();
 }

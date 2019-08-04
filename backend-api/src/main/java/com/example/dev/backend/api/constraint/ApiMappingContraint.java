@@ -5,5 +5,5 @@ public final class ApiMappingContraint {
 	private ApiMappingContraint () {
 	}
 	
-	public static final String BASE_URL = "backend/api/v1";
+	public static final String BASE_API_URL = "backend/api/v1";
 }
