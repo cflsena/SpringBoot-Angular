@@ -1,4 +1,4 @@
-package com.example.dev.backend.api.service;
+package com.example.dev.backend.api.service.commons;
 
 import java.io.Serializable;
 import java.util.List;

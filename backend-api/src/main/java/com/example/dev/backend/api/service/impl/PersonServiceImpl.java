@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.dev.backend.api.entity.PersonEntity;
 import com.example.dev.backend.api.repository.PersonRepository;
-import com.example.dev.backend.api.service.GenericServiceAb;
 import com.example.dev.backend.api.service.PersonService;
+import com.example.dev.backend.api.service.commons.GenericServiceAb;
 
 @Service
 public class PersonServiceImpl extends GenericServiceAb<PersonEntity, Long> implements PersonService {

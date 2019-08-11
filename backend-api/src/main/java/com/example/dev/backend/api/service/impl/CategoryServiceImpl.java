@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.dev.backend.api.entity.CategoryEntity;
 import com.example.dev.backend.api.repository.CategoryRepository;
 import com.example.dev.backend.api.service.CategoryService;
-import com.example.dev.backend.api.service.GenericServiceAb;
+import com.example.dev.backend.api.service.commons.GenericServiceAb;
 
 @Service
 public class CategoryServiceImpl extends GenericServiceAb<CategoryEntity, Long> implements CategoryService {
