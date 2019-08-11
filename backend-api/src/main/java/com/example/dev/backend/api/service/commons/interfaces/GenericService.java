@@ -34,6 +34,15 @@ public interface GenericService <Entity extends Object, ID extends Serializable>
 	 *
 	 */
 	void delete(Entity e);
+	
+	/**
+	 * Method to delete a JPA entity
+	 * 
+	 * @param e
+	 *            Entity
+	 *
+	 */
+	void deleteById(ID e);
 
 	/**
 	 * Method to find by primary key using Spring data structure

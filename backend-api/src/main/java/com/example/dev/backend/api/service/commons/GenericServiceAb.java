@@ -34,6 +34,13 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		getRepository().delete(e);
 		getRepository().flush();
 	}
+	
+	@Override
+	@Transactional
+	public void deleteById(ID id) {
+		getRepository().deleteById(id);
+		getRepository().flush();
+	}
 
 	@Override
 	@Transactional(readOnly = true)
