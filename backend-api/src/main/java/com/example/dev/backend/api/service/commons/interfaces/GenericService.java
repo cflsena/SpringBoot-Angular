@@ -23,6 +23,15 @@ public interface GenericService <Entity extends Object, ID extends Serializable>
 	 * @return Object Object
 	 */
 	Object save(Entity e);
+	
+	/**
+	 * Method to persistence (save or update behavior)
+	 * 
+	 * @param e
+	 *            Entity
+	 * @return Object Object
+	 */
+	Object update(Entity e, ID id);
 
 	List<Entity> saveInBatch(List<Entity> e);
 

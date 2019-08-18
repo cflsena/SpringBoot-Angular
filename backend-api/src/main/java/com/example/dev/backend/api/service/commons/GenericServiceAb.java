@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Example;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dev.backend.api.service.commons.interfaces.GenericService;
+import com.example.dev.backend.api.utils.GenericUtils;
 
 public abstract class GenericServiceAb<Entity extends Object, ID extends Serializable>
 		implements GenericService<Entity, ID> {
@@ -18,6 +21,24 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		e = getRepository().save(e);
 		getRepository().flush();
 		return e;
+	}
+	
+	@Override
+	@Transactional
+	public Object update(Entity e, ID id) {
+		Optional<Object> op = (Optional) getRepository().findById(id);
+		if (!op.isPresent()) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		Entity ob = (Entity) op.get();
+		if (GenericUtils.isNotEmpytOrNotNull(e)) {
+			BeanUtils.copyProperties(e, ob, "id");
+			ob = getRepository().save(ob);
+			getRepository().flush();
+		} else {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return ob;
 	}
 
 	@Override
