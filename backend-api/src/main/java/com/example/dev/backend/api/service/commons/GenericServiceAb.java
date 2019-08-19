@@ -30,7 +30,7 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		if (!op.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		Entity ob = (Entity) op.get();
+		Entity ob = (Entity) findAnyEntityById(id);
 		if (GenericUtils.isNotEmpytOrNotNull(e)) {
 			BeanUtils.copyProperties(e, ob, "id");
 			ob = getRepository().save(ob);
@@ -86,5 +86,14 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 	@Transactional(readOnly = true)
 	public Long count() {
 		return getRepository().count();
+	}
+	
+	@Transactional(readOnly = true)
+	public Object findAnyEntityById(ID id) {
+		Optional<Object> op = (Optional) getRepository().findById(id);
+		if (!op.isPresent()) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return op.get();
 	}
 }

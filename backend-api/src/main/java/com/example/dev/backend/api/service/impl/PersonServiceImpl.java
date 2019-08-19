@@ -8,6 +8,7 @@ import com.example.dev.backend.api.entity.PersonEntity;
 import com.example.dev.backend.api.repository.PersonRepository;
 import com.example.dev.backend.api.service.PersonService;
 import com.example.dev.backend.api.service.commons.GenericServiceAb;
+import com.example.dev.backend.api.utils.GenericUtils;
 
 @Service
 public class PersonServiceImpl extends GenericServiceAb<PersonEntity, Long> implements PersonService {
@@ -18,5 +19,15 @@ public class PersonServiceImpl extends GenericServiceAb<PersonEntity, Long> impl
 	@Override
 	public JpaRepository<PersonEntity, Long> getRepository() {
 		return this.personRepository;
+	}
+
+	@Override
+	public void updateActiveProperty(Boolean statusActive, Long id) {
+		PersonEntity personEntityUpdated = (PersonEntity) findAnyEntityById(id);
+		if (GenericUtils.isNotEmpytOrNotNull(personEntityUpdated)) {
+			personEntityUpdated.setActive(statusActive);
+			getRepository().save(personEntityUpdated);
+			getRepository().flush();
+		}
 	}
 }
