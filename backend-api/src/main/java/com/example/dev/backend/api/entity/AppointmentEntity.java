@@ -66,9 +66,9 @@ public class AppointmentEntity implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
-	private CategoryEntity category_id;
+	private CategoryEntity category;
 	
 	@ManyToOne
-	@JoinColumn(name="peson_id")
-	private PersonEntity person_id;
+	@JoinColumn(name="person_id")
+	private PersonEntity person;
 }
