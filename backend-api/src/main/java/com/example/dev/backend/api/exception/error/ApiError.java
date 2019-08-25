@@ -3,6 +3,7 @@ package com.example.dev.backend.api.exception.error;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -49,7 +50,7 @@ public class ApiError {
 	public ApiError(HttpStatus status, String message, Throwable ex, List<ApiSubError> apiSubErrorList) {
 		this();
 		this.status = status;
-		this.debugMessage = ex.getLocalizedMessage();
+		this.debugMessage = ExceptionUtils.getRootCauseMessage(ex);
 		this.setApiSubErrorList(apiSubErrorList);
 	}
 }

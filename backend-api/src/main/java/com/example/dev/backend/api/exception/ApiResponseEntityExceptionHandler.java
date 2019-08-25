@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class ApiResponseEntityExceptionHandler extends ResponseEntityExceptionHa
 	
 	private String INVALID_MESSAGE = "invalid.message";
 	private String RESOURCE_NOT_FOUND = "resource.not.found";
+	private String OPERATION_NOT_PERMITTED = "operation.not.permitted";
 	
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
@@ -54,10 +56,24 @@ public class ApiResponseEntityExceptionHandler extends ResponseEntityExceptionHa
 				new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 	
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
+			WebRequest request) {
+		return handleExceptionInternal(ex,
+				this.buildErrorApi(HttpStatus.BAD_REQUEST, this.getUserMessage(OPERATION_NOT_PERMITTED), ex),
+				new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
 	private ApiError buildErrorApi(HttpStatus status, String userMessage, EmptyResultDataAccessException ex) {
 		List<ApiSubError> apiSubErrorList = new ArrayList<ApiSubError>();
 		apiSubErrorList.add(new ApiSubError(null, null, null, userMessage));
 		return new ApiError(HttpStatus.NOT_FOUND, userMessage, ex, apiSubErrorList);
+	}
+	
+	private ApiError buildErrorApi(HttpStatus status, String userMessage, DataIntegrityViolationException ex) {
+		List<ApiSubError> apiSubErrorList = new ArrayList<ApiSubError>();
+		apiSubErrorList.add(new ApiSubError(null, null, null, userMessage));
+		return new ApiError(HttpStatus.BAD_REQUEST, userMessage, ex, apiSubErrorList);
 	}
 	
 	private ApiError buildErrorApi(HttpStatus status, String userMessage, Throwable ex) {

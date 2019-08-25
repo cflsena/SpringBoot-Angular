@@ -52,22 +52,25 @@ public class AppointmentEntity implements Serializable {
 	private String description;
 	
 	@NotNull
-	private LocalDate payDate;
-	
 	private LocalDate dueDate;
+	
+	private LocalDate payDate;
 	
 	@NotNull
 	private BigDecimal cost;
 	
 	private String observation;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private AppointmentTypeEnum appointmentType;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private CategoryEntity category;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="person_id")
 	private PersonEntity person;
