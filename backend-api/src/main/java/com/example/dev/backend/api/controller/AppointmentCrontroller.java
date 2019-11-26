@@ -46,8 +46,7 @@ public class AppointmentCrontroller {
 	@PostMapping
 	public ResponseEntity<AppointmentEntity> save(@Valid @RequestBody AppointmentEntity appointmentEntityRequest,
 			HttpServletResponse response) {
-		AppointmentEntity appointmentEntitySaved = (AppointmentEntity) appointmentService
-				.save(appointmentEntityRequest);
+		AppointmentEntity appointmentEntitySaved = appointmentService.saveAppointmentEntity(appointmentEntityRequest);
 		publisher.publishEvent(new CreatedResourceEvent(this, response, appointmentEntitySaved.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(appointmentEntitySaved);
 	}

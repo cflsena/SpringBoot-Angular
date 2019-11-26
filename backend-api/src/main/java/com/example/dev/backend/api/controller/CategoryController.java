@@ -39,6 +39,13 @@ public class CategoryController {
 	public List<CategoryEntity> findAll() {
 		return categoryService.findAll();
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<CategoryEntity> findById(@PathVariable Long id) {
+		Optional<Object> op = categoryService.findById(id);
+		return op.isPresent() ? ResponseEntity.ok((CategoryEntity) op.get()) : ResponseEntity.notFound().build();
+
+	}
 
 	@PostMapping
 	public ResponseEntity<CategoryEntity> save(@Valid @RequestBody CategoryEntity categoryEntityRequest,
@@ -48,13 +55,6 @@ public class CategoryController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoryEntitySaved);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<CategoryEntity> findById(@PathVariable Long id) {
-		Optional<Object> op = categoryService.findById(id);
-		return op.isPresent() ? ResponseEntity.ok((CategoryEntity) op.get()) : ResponseEntity.notFound().build();
-
-	}
-	
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete (@RequestBody CategoryEntity categoryEntityRequest) {
