@@ -17,12 +17,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@JsonInclude(value=Include.NON_NULL)
+@JsonInclude(value = Include.NON_NULL)
 public class ApiError {
 
 	private HttpStatus status;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private LocalDateTime localDatetime;
+	private String userMessage;
 	private String debugMessage;
 	private List<ApiSubError> apiSubErrorList;
 
@@ -41,13 +42,20 @@ public class ApiError {
 		this.debugMessage = ex.getCause().toString();
 	}
 
-	public ApiError(HttpStatus status, String message, Throwable ex) {
+	public ApiError(HttpStatus status, String userMessage, Throwable ex) {
 		this();
 		this.status = status;
+		this.userMessage = userMessage;
 		this.debugMessage = ex.getCause().toString();
 	}
 	
-	public ApiError(HttpStatus status, String message, Throwable ex, List<ApiSubError> apiSubErrorList) {
+	public ApiError(HttpStatus status, String userMessage) {
+		this();
+		this.status = status;
+		this.userMessage = userMessage;
+	}
+
+	public ApiError(HttpStatus status, Throwable ex, List<ApiSubError> apiSubErrorList) {
 		this();
 		this.status = status;
 		this.debugMessage = ExceptionUtils.getRootCauseMessage(ex);

@@ -23,22 +23,23 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		return e;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@Transactional
 	public Object update(Entity e, ID id) {
-		Optional<Object> op = (Optional) getRepository().findById(id);
+		Optional<Entity> op = (Optional) getRepository().findById(id);
 		if (!op.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		Entity ob = (Entity) findAnyEntityById(id);
+		Entity foundEntity = op.get();
 		if (GenericUtils.isNotEmpytOrNotNull(e)) {
-			BeanUtils.copyProperties(e, ob, "id");
-			ob = getRepository().save(ob);
+			BeanUtils.copyProperties(e, foundEntity, "id");
+			foundEntity = getRepository().save(foundEntity);
 			getRepository().flush();
 		} else {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return ob;
+		return foundEntity;
 	}
 
 	@Override
@@ -63,9 +64,10 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		getRepository().flush();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Object> findById(ID id) {
+	public Optional<Entity> findById(ID id) {
 		return (Optional) getRepository().findById(id);
 	}
 
@@ -86,14 +88,5 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 	@Transactional(readOnly = true)
 	public Long count() {
 		return getRepository().count();
-	}
-	
-	@Transactional(readOnly = true)
-	public Object findAnyEntityById(ID id) {
-		Optional<Object> op = (Optional) getRepository().findById(id);
-		if (!op.isPresent()) {
-			throw new EmptyResultDataAccessException(1);
-		}
-		return op.get();
 	}
 }

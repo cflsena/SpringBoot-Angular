@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dev.backend.api.constraint.ApiMappingContraint;
 import com.example.dev.backend.api.entity.AppointmentEntity;
 import com.example.dev.backend.api.event.CreatedResourceEvent;
 import com.example.dev.backend.api.service.AppointmentService;
 
 @RestController
-@RequestMapping(value = ApiMappingContraint.BASE_API_URL + "/lancamentos")
+@RequestMapping("/lancamentos")
 public class AppointmentCrontroller {
 
 	@Autowired
@@ -39,7 +38,7 @@ public class AppointmentCrontroller {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<AppointmentEntity> findById(@PathVariable Long id) {
-		Optional<Object> op = appointmentService.findById(id);
+		Optional<AppointmentEntity> op = appointmentService.findById(id);
 		return op.isPresent() ? ResponseEntity.ok((AppointmentEntity) op.get()) : ResponseEntity.notFound().build();
 	}
 	

@@ -21,13 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dev.backend.api.constraint.ApiMappingContraint;
 import com.example.dev.backend.api.entity.PersonEntity;
 import com.example.dev.backend.api.event.CreatedResourceEvent;
 import com.example.dev.backend.api.service.PersonService;
 
 @RestController
-@RequestMapping(value = ApiMappingContraint.BASE_API_URL + "/pessoas")
+@RequestMapping("/pessoas")
 public class PersonController {
 
 	@Autowired
@@ -51,7 +50,7 @@ public class PersonController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<PersonEntity> findById(@PathVariable Long id) {
-		Optional<Object> op = personService.findById(id);
+		Optional<PersonEntity> op = personService.findById(id);
 		return op.isPresent() ? ResponseEntity.ok((PersonEntity) op.get()) : ResponseEntity.notFound().build();
 
 	}

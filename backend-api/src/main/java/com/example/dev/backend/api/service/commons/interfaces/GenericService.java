@@ -60,7 +60,7 @@ public interface GenericService <Entity extends Object, ID extends Serializable>
 	 *            ID
 	 * @return Optional<Object> Optional<Object>
 	 */
-	Optional<Object> findById(ID id);
+	Optional<Entity> findById(ID id);
 
 	/**
 	 * Method to find all entities using Spring data structure
