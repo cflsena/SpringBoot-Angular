@@ -49,6 +49,13 @@ public class ApiError {
 		this.debugMessage = ex.getCause().toString();
 	}
 	
+	public ApiError(HttpStatus status, String userMessage, String debugMessage) {
+		this();
+		this.status = status;
+		this.userMessage = userMessage;
+		this.debugMessage = debugMessage;
+	}
+	
 	public ApiError(HttpStatus status, String userMessage) {
 		this();
 		this.status = status;
