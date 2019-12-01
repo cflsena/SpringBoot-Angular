@@ -1,13 +1,12 @@
 package com.example.dev.backend.api.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dev.backend.api.commons.model.PageCustom;
 import com.example.dev.backend.api.controller.commons.GenericController;
 import com.example.dev.backend.api.entity.AppointmentEntity;
 import com.example.dev.backend.api.entity.filter.AppointmentFilter;
@@ -28,9 +27,9 @@ public class AppointmentCrontroller extends GenericController<AppointmentEntity,
 	}
 
 	@GetMapping("/filtro")
-	public ResponseEntity<List<AppointmentEntity>> findByfilter(AppointmentFilter appointmentFilter) {
-		List<AppointmentEntity> appointmentEntityList = appointmentService.findByfilter(appointmentFilter);
-		return GenericUtils.isNotEmpytAndNotNull(appointmentEntityList) ? ResponseEntity.ok(appointmentEntityList)
+	public ResponseEntity<PageCustom> findByfilter(AppointmentFilter appointmentFilter) {
+		PageCustom appointmentPageCustom = appointmentService.findByfilter(appointmentFilter);
+		return GenericUtils.isNotEmpytAndNotNull(appointmentPageCustom.getListObject()) ? ResponseEntity.ok(appointmentPageCustom)
 				: ResponseEntity.noContent().build();
 	}
 }

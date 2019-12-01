@@ -1,12 +1,12 @@
 package com.example.dev.backend.api.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import com.example.dev.backend.api.commons.model.PageCustom;
 import com.example.dev.backend.api.entity.AppointmentEntity;
 import com.example.dev.backend.api.entity.PersonEntity;
 import com.example.dev.backend.api.entity.filter.AppointmentFilter;
@@ -51,7 +51,7 @@ public class AppointmentServiceImpl extends GenericServiceAb<AppointmentEntity, 
 		return (AppointmentEntity) super.save(appointmentEntity);
 	}
 
-	public List<AppointmentEntity> findByfilter(AppointmentFilter appointmentFilter) {
+	public PageCustom findByfilter(AppointmentFilter appointmentFilter) {
 		return appointmentRepositoryCustom.findByfilter(appointmentFilter);
 	}
 }
