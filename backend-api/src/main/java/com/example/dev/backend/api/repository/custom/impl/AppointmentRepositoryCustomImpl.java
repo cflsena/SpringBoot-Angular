@@ -20,7 +20,7 @@ import com.example.dev.backend.api.repository.custom.commons.CustomRepositoryAb;
 import com.example.dev.backend.api.utils.GenericUtils;
 
 @Component
-public class AppointmentRepositoryCustomImpl extends CustomRepositoryAb<AppointmentEntity, Long>
+public class AppointmentRepositoryCustomImpl extends CustomRepositoryAb
 		implements AppointmentRepositoryCustom {
 
 	@Override
@@ -31,7 +31,8 @@ public class AppointmentRepositoryCustomImpl extends CustomRepositoryAb<Appointm
 		CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<AppointmentEntity> criteriaQuery = criteriaBuilder.createQuery(AppointmentEntity.class);
 		Root<AppointmentEntity> root = criteriaQuery.from(AppointmentEntity.class);
-
+		root.alias("root_alias");
+		
 		Predicate[] predicates = createRestrictions(appointmentFilter, criteriaBuilder, root);
 
 		Long count = this.count(AppointmentEntity.class, appointmentFilter, predicates);
