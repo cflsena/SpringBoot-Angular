@@ -1,5 +1,6 @@
 package com.example.dev.backend.api.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.dev.backend.api.entity.AppointmentEntity;
 import com.example.dev.backend.api.entity.PersonEntity;
+import com.example.dev.backend.api.entity.filter.AppointmentFilter;
 import com.example.dev.backend.api.exception.customs.InativePersonException;
 import com.example.dev.backend.api.exception.customs.NonExistentPersonException;
 import com.example.dev.backend.api.repository.AppointmentRepository;
 import com.example.dev.backend.api.repository.PersonRepository;
+import com.example.dev.backend.api.repository.custom.AppointmentRepositoryCustom;
 import com.example.dev.backend.api.service.AppointmentService;
 import com.example.dev.backend.api.service.commons.GenericServiceAb;
 
@@ -23,6 +26,9 @@ public class AppointmentServiceImpl extends GenericServiceAb<AppointmentEntity, 
 
 	@Autowired
 	private PersonRepository personRepository;
+
+	@Autowired
+	private AppointmentRepositoryCustom appointmentRepositoryCustom;
 
 	@Override
 	public JpaRepository<AppointmentEntity, Long> getRepository() {
@@ -43,5 +49,9 @@ public class AppointmentServiceImpl extends GenericServiceAb<AppointmentEntity, 
 		}
 
 		return (AppointmentEntity) super.save(appointmentEntity);
+	}
+
+	public List<AppointmentEntity> findByfilter(AppointmentFilter appointmentFilter) {
+		return appointmentRepositoryCustom.findByfilter(appointmentFilter);
 	}
 }

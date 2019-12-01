@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Example;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dev.backend.api.service.commons.interfaces.GenericService;
@@ -32,7 +31,7 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 			throw new EmptyResultDataAccessException(1);
 		}
 		Entity foundEntity = op.get();
-		if (GenericUtils.isNotEmpytOrNotNull(e)) {
+		if (GenericUtils.isNotEmpytAndNotNull(e)) {
 			BeanUtils.copyProperties(e, foundEntity, "id");
 			foundEntity = getRepository().save(foundEntity);
 			getRepository().flush();
@@ -77,12 +76,12 @@ public abstract class GenericServiceAb<Entity extends Object, ID extends Seriali
 		return getRepository().findAll();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Entity> findByFilter(Entity e) {
-		Example<Entity> example = Example.of(e);
-		return getRepository().findAll(example);
-	}
+//	@Override
+//	@Transactional(readOnly = true)
+//	public List<Entity> findByFilter(Entity e) {
+//		Example<Entity> example = Example.of(e);
+//		return getRepository().findAll(example);
+//	}
 
 	@Override
 	@Transactional(readOnly = true)

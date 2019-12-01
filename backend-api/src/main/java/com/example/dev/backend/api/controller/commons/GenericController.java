@@ -61,6 +61,10 @@ public abstract class GenericController<Entity, ID> {
 	protected void delete(@PathVariable("id") ID id) {
 		getService().deleteById((Long) id);
 	}
+	
+	protected ApplicationEventPublisher getPublisher() {
+		return this.publisher;
+	}
 
 	protected abstract GenericService<Entity, Long> getService();
 }

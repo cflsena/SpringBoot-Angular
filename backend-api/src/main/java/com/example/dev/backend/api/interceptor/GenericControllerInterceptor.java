@@ -62,7 +62,7 @@ public class GenericControllerInterceptor extends HandlerInterceptorAdapter {
 		List<Entry<Object, Object>> propList = prop.entrySet().stream().collect(Collectors.toList());
 
 		propList.stream().filter(item -> !this.isIgnoreEndPoint()).forEach(item -> {
-			if (GenericUtils.isNotEmpytOrNotNull(item.getValue())) {
+			if (GenericUtils.isNotEmpytAndNotNull(item.getValue())) {
 				String[] value = item.getValue().toString().split(";");
 				Pattern p = Pattern.compile(value[1]);
 				Matcher m = p.matcher(servletPath);

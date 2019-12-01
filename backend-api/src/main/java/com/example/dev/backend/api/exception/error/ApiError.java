@@ -39,14 +39,14 @@ public class ApiError {
 	public ApiError(HttpStatus status, Throwable ex) {
 		this();
 		this.status = status;
-		this.debugMessage = ex.getCause().toString();
+		this.debugMessage = ExceptionUtils.getRootCauseMessage(ex);
 	}
 
 	public ApiError(HttpStatus status, String userMessage, Throwable ex) {
 		this();
 		this.status = status;
 		this.userMessage = userMessage;
-		this.debugMessage = ex.getCause().toString();
+		this.debugMessage = ExceptionUtils.getRootCauseMessage(ex);
 	}
 	
 	public ApiError(HttpStatus status, String userMessage, String debugMessage) {

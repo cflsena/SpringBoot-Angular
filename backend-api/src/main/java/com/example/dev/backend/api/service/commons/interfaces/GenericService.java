@@ -75,7 +75,7 @@ public interface GenericService <Entity extends Object, ID extends Serializable>
 	 * 
 	 * @return List<Entity> List<Entity>
 	 */
-	List<Entity> findByFilter(Entity e);
+//	List<Entity> findByFilter(Entity e);
 
 	/**
 	 * Method that returns total records from that entity
