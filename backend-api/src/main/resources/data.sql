@@ -31,3 +31,29 @@ INSERT INTO APPOINTMENT (id, description, due_date, pay_date, cost, observation,
 INSERT INTO APPOINTMENT (id, description, due_date, pay_date, cost, observation, appointment_type, category_id, person_id) values (14, 'Café', '2017-04-10', '2017-04-10', 4.32, null, 'DESPESA', 4, 2);
 INSERT INTO APPOINTMENT (id, description, due_date, pay_date, cost, observation, appointment_type, category_id, person_id) values (15, 'Lanche', '2017-06-10', null, 10.20, null, 'DESPESA', 4, 1);
 
+INSERT INTO USERS (id, name, email, password) values (1, 'Administrador', 'admin@testapi.com', '$2a$10$dufCpQClVReFAnikyPeJ/eCNYwIjtvL3tSG8DOkOesHyc99zxQbN.');
+INSERT INTO USERS (id, name, email, password) values (2, 'Julia', 'julia@testapi.com', '$2a$10$tg7da4UIkJPQUcs3FFbkx.EIyxSt18ybRAqX9u5ySJJXXytfXNesW');
+
+INSERT INTO PERMISSION (id, description) values (1, 'ROLE_CREATE_CATEGORY');
+INSERT INTO PERMISSION (id, description) values (2, 'ROLE_FIND_CATEGORY');
+
+INSERT INTO PERMISSION (id, description) values (3, 'ROLE_CREATE_PERSON');
+INSERT INTO PERMISSION (id, description) values (4, 'ROLE_REMOVE_PERSON');
+INSERT INTO PERMISSION (id, description) values (5, 'ROLE_FIND_PERSON');
+
+INSERT INTO PERMISSION (id, description) values (6, 'ROLE_CREATE_APPOINTMENT');
+INSERT INTO PERMISSION (id, description) values (7, 'ROLE_REMOVE_APPOINTMENT');
+INSERT INTO PERMISSION (id, description) values (8, 'ROLE_FIND_APPOINTMENT');
+
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 1);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 2);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 3);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 4);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 5);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 6);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 7);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (1, 8);
+
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (2, 2);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (2, 5);
+INSERT INTO USERS_PERMISSION (user_id, permission_id) values (2, 8);
